@@ -1,0 +1,192 @@
+﻿<mah:MetroWindow x:Class="PBZ40Panel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:d3="http://research.microsoft.com/DynamicDataDisplay/1.0"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:PBZ40Panel"
+        mc:Ignorable="d"
+        Title="PBZ40Panel-SHF v1.5" Height="429" Width="586" Icon="/模拟直流电源.png" WindowStartupLocation="CenterOwner" IsTabStop="False" ResizeMode="CanMinimize" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="Cbx_coms" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" Width="73" Height="19"/>
+        <Button x:Name="btn_start"  Content="START" HorizontalAlignment="Left" Margin="124,10,0,0" VerticalAlignment="Top" Click="btn_start_Click"/>
+        <Button x:Name="btn_refrash" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="25" Click="btn_refrash_Click" OpacityMask="#FFF10C0C">
+            <Button.Foreground>
+                <ImageBrush ImageSource="/刷新.png" Stretch="Uniform"/>
+            </Button.Foreground>
+            <Button.Background>
+                <ImageBrush ImageSource="/刷新.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btn_stop" Content="STOP" HorizontalAlignment="Left" Margin="171,10,0,0" VerticalAlignment="Top" Click="btn_stop_Click"/>
+        <Grid Margin="222,10,86,320">
+            <Label x:Name="lbl_vol" Content="Voltage:N/A" HorizontalAlignment="Left" Margin="128,-4,0,0" VerticalAlignment="Top" Width="129" Background="{x:Null}" FontWeight="Bold" Foreground="#FF003DFF"/>
+            <Label x:Name="lbl_crt" Content="Current:N/A" HorizontalAlignment="Left" Margin="0,-4,0,0" VerticalAlignment="Top" Width="131" Background="{x:Null}" FontWeight="Bold" Foreground="#FF003DFF"/>
+            <CheckBox x:Name="cbx_autoupd" Content="AutoUpdate" HorizontalAlignment="Left" Margin="3,32,0,0" VerticalAlignment="Top" Checked="cbx_autoupd_Checked" Unchecked="cbx_autoupd_Unchecked"/>
+        </Grid>
+        <mah:MetroAnimatedSingleRowTabControl x:Name="tbc_control" Margin="0,60,0,27">
+            <TabItem Header="General">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Margin="1,0,406,2" Header="Measure">
+                        <Grid Margin="0,0,0,0" Height="296">
+                            <Button x:Name="btn_setvol" Content="SET" HorizontalAlignment="Left" Margin="118,36,0,0" VerticalAlignment="Top" Click="btn_setvol_Click" Height="31" Width="42" FontSize="16" FontFamily="Arial Rounded MT Bold" IsDefault="True"/>
+                            <TextBox x:Name="tbx_vol" HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="82" Height="30" FontSize="20" FontFamily="Bahnschrift Light" FontWeight="Bold"/>
+                            <Label Content="V" HorizontalAlignment="Left" Margin="95,48,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                            <Button x:Name="btn_r01v" Content="-0.1V" HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top" Click="btn_r01v_Click" Width="38"/>
+                            <Button x:Name="btn_p01v" Content="+0.1V" HorizontalAlignment="Left" Margin="54,74,0,0" VerticalAlignment="Top" Click="btn_p01v_Click"/>
+                            <Label Content="Voltage" HorizontalAlignment="Left" Margin="10,5,0,259" FontWeight="Bold" Width="75" FontSize="14"/>
+                            <RadioButton x:Name="rbt_off" Content="OFF" HorizontalAlignment="Left" Margin="118,107,0,0" VerticalAlignment="Top" IsChecked="True" Checked="rbt_off_Checked" FontWeight="Bold" Width="53" Background="{x:Null}"/>
+                            <RadioButton x:Name="rbt_on" Content="ON" HorizontalAlignment="Left" Margin="118,84,0,0" VerticalAlignment="Top" Checked="rbt_on_Checked" FontWeight="Bold" Background="{x:Null}"/>
+                            <Button x:Name="btn_12v" Content="12V" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="38" Click="btn_12v_Click"/>
+                            <Button x:Name="btn_13halfv" Content="13.5V" HorizontalAlignment="Left" Margin="54,138,0,0" VerticalAlignment="Top" Width="40" Click="btn_13halfv_Click"/>
+                            <Button x:Name="btn_5v" Content="5V" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top" Width="38" Click="btn_5v_Click"/>
+                            <Button x:Name="btn_17v" Content="17V" HorizontalAlignment="Left" Margin="54,170,0,0" VerticalAlignment="Top" Width="40" Click="btn_17v_Click"/>
+                            <Button x:Name="btn_r05v" Content="-0.5V" HorizontalAlignment="Left" Margin="10,106,0,0" VerticalAlignment="Top" Click="btn_r05v_Click" Width="38"/>
+                            <Button x:Name="btn_p05v" Content="+0.5V" HorizontalAlignment="Left" Margin="54,106,0,0" VerticalAlignment="Top" Click="btn_p05v_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Configration" Margin="180,0,0,2">
+                        <Grid>
+                            <TextBox x:Name="tbx_setmaxvol" HorizontalAlignment="Left" Margin="89,2,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="52" FontFamily="Bahnschrift Light" FontSize="18" Height="28"/>
+                            <TextBox x:Name="tbx_setmaxcrt" HorizontalAlignment="Left" Margin="89,34,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="52" FontFamily="Bahnschrift Light" FontSize="18" Height="28"/>
+                            <TextBox x:Name="tbx_setminvol" HorizontalAlignment="Left" Margin="89,68,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="52" FontFamily="Bahnschrift Light" FontSize="18" Height="28"/>
+                            <TextBox x:Name="tbx_setmincrt" HorizontalAlignment="Left" Margin="89,100,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="52" FontFamily="Bahnschrift Light" FontSize="18" Height="28"/>
+                            <Label Content="A" HorizontalAlignment="Left" Margin="146,36,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                            <Label Content="V" HorizontalAlignment="Left" Margin="145,4,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                            <Button x:Name="btn_setmaxvol" Content="SET" HorizontalAlignment="Left" Margin="168,1,0,0" VerticalAlignment="Top" Click="btn_setmaxvol_Click"/>
+                            <Button x:Name="btn_setmaxcrt" Content="SET" HorizontalAlignment="Left" Margin="168,33,0,0" VerticalAlignment="Top" Click="btn_setmaxcrt_Click"/>
+                            <Label Content="UPPer VOL." HorizontalAlignment="Right" Margin="0,3,307,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <Label Content="UPPer CUR." HorizontalAlignment="Right" Margin="0,35,307,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <Button x:Name="btn_readvolt" Content="VOLT?" HorizontalAlignment="Left" Margin="238,6,0,0" VerticalAlignment="Top" Width="46" Click="btn_readvolt_Click"/>
+                            <Button x:Name="btn_cls" Content="*CLS" HorizontalAlignment="Left" Margin="294,6,0,0" VerticalAlignment="Top" Width="46" Click="btn_cls_Click"/>
+                            <Label Content="A" HorizontalAlignment="Left" Margin="146,104,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                            <Label Content="V" HorizontalAlignment="Left" Margin="146,70,0,0" VerticalAlignment="Top" FontFamily="Arial Black"/>
+                            <Button x:Name="btn_setminvol" Content="SET" HorizontalAlignment="Left" Margin="168,66,0,0" VerticalAlignment="Top" Click="btn_setminvol_Click" />
+                            <Button x:Name="btn_setmincrt" Content="SET" HorizontalAlignment="Left" Margin="168,100,0,0" VerticalAlignment="Top" Click="btn_setmincrt_Click" />
+                            <Label Content="LOWer VOL." HorizontalAlignment="Right" Margin="0,68,307,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <Label Content="LOWer CUR." HorizontalAlignment="Right" Margin="0,102,307,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                            <Button x:Name="btn_readerr" Content="ERR?" HorizontalAlignment="Left" Margin="238,42,0,0" VerticalAlignment="Top" Width="46" Click="btn_readerr_Click"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Program">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Margin="0,0,455,2" Header="Configration">
+                        <Grid Margin="-8,0,-2,0" Height="248">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="8*"/>
+                                <RowDefinition Height="23*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="tbx_gt1" HorizontalAlignment="Left" Margin="70,22,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="52" Grid.Row="1" Height="17" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="T1(ms)" HorizontalAlignment="Left" Margin="18,22,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                            <TextBox x:Name="tbx_gt3" HorizontalAlignment="Left" Margin="70,50,0,0" TextWrapping="Wrap" Text="350" VerticalAlignment="Top" Width="52" Grid.Row="1" Height="17" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="T3(ms)" HorizontalAlignment="Left" Margin="18,50,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                            <TextBox x:Name="tbx_ginit" HorizontalAlignment="Left" Margin="70,2,0,0" TextWrapping="Wrap" Text="5000" VerticalAlignment="Top" Width="52" Height="20" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="Init(ms)" HorizontalAlignment="Left" Margin="16,2,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbx_gnom" HorizontalAlignment="Left" Margin="70,0,0,0" TextWrapping="Wrap" Text="13.5" VerticalAlignment="Center" Width="52" Grid.Row="1" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="Unom(V)" HorizontalAlignment="Left" Margin="4,0,0,0" VerticalAlignment="Center" Grid.Row="1" Width="64"/>
+                            <TextBox x:Name="tbx_gmin" HorizontalAlignment="Left" Margin="70,107,0,0" TextWrapping="Wrap" Text="5.2" VerticalAlignment="Top" Width="52" Grid.Row="1" Height="22" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="Uabn(V)" HorizontalAlignment="Left" Margin="8,107,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                            <TextBox x:Name="tbx_goff" HorizontalAlignment="Left" Margin="70,30,0,0" TextWrapping="Wrap" Text="10000" VerticalAlignment="Top" Width="52" Height="21" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="Off(ms)" HorizontalAlignment="Left" Margin="14,31,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbx_gend" HorizontalAlignment="Left" Margin="70,58,0,0" TextWrapping="Wrap" Text="10000" VerticalAlignment="Top" Width="52" Grid.RowSpan="2" Height="11" FontFamily="Bahnschrift Light" FontSize="14"/>
+                            <Label Content="End(ms)" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                            <CheckBox x:Name="cbx_autolog" Content="AutoLOG" HorizontalAlignment="Left" Margin="16,138,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <d3:ChartPlotter Name="plotter" Margin="130,0,131,0" Visible="-0.1,-1,1,12"  MouseLeftButtonUp="plotter_MouseLeftButtonUp">
+                        <d3:HorizontalLine Value="{Binding MaxVoltage}" Stroke="DarkBlue" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:HorizontalLine Value="{Binding MinVoltage}" Stroke="DarkBlue" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:VerticalLine Value="{Binding Timeline1}" Stroke="Red" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:VerticalLine Value="{Binding Timeline2}" Stroke="Red" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:VerticalLine Value="{Binding Timeline3}" Stroke="Red" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:VerticalLine Value="{Binding Timestamp}" Stroke="DarkGreen" StrokeThickness="1.5" />
+                        <d3:CursorCoordinateGraph x:Name="ccg_graph" AutoHide="True" LineStroke="Black" LineStrokeThickness="1" />
+                        <d3:ChartPlotter.HorizontalAxis>
+                            <d3:HorizontalAxis x:Name="hAxis"/>
+                        </d3:ChartPlotter.HorizontalAxis>
+
+                        <d3:ChartPlotter.VerticalAxis>
+                            <d3:VerticalAxis x:Name="vAxis"/>
+                        </d3:ChartPlotter.VerticalAxis>
+                    </d3:ChartPlotter>
+                    <Label Content="Rept." HorizontalAlignment="Left" Margin="459,4,0,0" VerticalAlignment="Top" Width="43"/>
+                    <TextBox x:Name="tbx_repection" HorizontalAlignment="Left" Margin="500,3,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="44" IsReadOnly="True" FontFamily="Bahnschrift Light" FontSize="14"/>
+                    <Label Content="/Inf." HorizontalAlignment="Left" Margin="544,8,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+                    <Label Content="Step" HorizontalAlignment="Left" Margin="459,31,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="tbx_step" HorizontalAlignment="Left" Margin="500,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="44" IsReadOnly="True" FontFamily="Bahnschrift Light" Height="18" FontSize="14"/>
+                    <Label Content="/5" HorizontalAlignment="Left" Margin="544,36,0,0" VerticalAlignment="Top" FontWeight="Normal"/>
+                    <TextBox x:Name="tbx_steptime" HorizontalAlignment="Left" Margin="459,60,0,0" TextWrapping="Wrap" Text="00:00:00.00" VerticalAlignment="Top" Width="114" IsReadOnly="True" Height="31" TextAlignment="Center" FontSize="20" FontFamily="Bahnschrift Light"/>
+                    <TextBox x:Name="tbx_runstate" HorizontalAlignment="Left" Margin="459,93,0,0" TextWrapping="Wrap" Text="OFF" VerticalAlignment="Top" Width="114" IsReadOnly="True" FontSize="22" TextAlignment="Center" Height="35" FontFamily="Bahnschrift Light" FontWeight="Bold"/>
+                    <Button x:Name="btn_gview" Style="{DynamicResource MahApps.Styles.Button.Square.Accent}" Content="Import" HorizontalAlignment="Left" Margin="462,199,0,0" VerticalAlignment="Top" Width="50" Click="btn_gview_Click"/>
+                    <Button x:Name="btn_vstart"  Style="{DynamicResource MahApps.Styles.Button.Square.Highlight}" Content="Execute" HorizontalAlignment="Left" Margin="517,199,0,0" VerticalAlignment="Top" Width="49" Click="btn_vstart_Click" IsEnabled="False" Height="28"/>
+                    <Button x:Name="btn_vstop"  Style="{DynamicResource MahApps.Styles.Button.Square}" Content="Abort" HorizontalAlignment="Left" Margin="517,231,0,0" VerticalAlignment="Top" Width="49" Click="btn_vstop_Click" IsEnabled="False"/>
+                    <CheckBox x:Name="cbx_offaftexec" Content="OFF after exec." HorizontalAlignment="Left" Margin="462,178,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                    <TextBox x:Name="tbx_runtime" HorizontalAlignment="Left" Margin="459,143,0,0" TextWrapping="Wrap" Text="00:00:00.00" VerticalAlignment="Top" Width="114" IsReadOnly="True" Height="30" TextAlignment="Center" FontSize="20" FontFamily="Bahnschrift Light"/>
+                    <Label Content="Run Time" HorizontalAlignment="Left" Margin="459,124,0,0" VerticalAlignment="Top" Width="71" Height="24"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox Margin="0,0,455,2" Header="Control">
+                        <Grid Margin="-8,0,-2,0" Height="248">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Button x:Name="btn_controllog" Content="Start Log" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top" Height="34" Width="72" Click="btn_controllog_Click"/>
+                            <Label Content="Voltage  ——" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FF00C500"/>
+                            <Label Content="Current  ——" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="#FFDD0606"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <d3:ChartPlotter Name="plotter_log" Margin="130,0,1,0" Visible="-0.1,-1,1,12"  MouseLeftButtonUp="plotter_MouseLeftButtonUp">
+                        <d3:HorizontalLine Value="{Binding MaxVoltagelog}" Stroke="DarkBlue" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:HorizontalLine Value="{Binding MinVoltagelog}" Stroke="DarkBlue" StrokeThickness="0.5" StrokeDashArray="4,5" />
+                        <d3:CursorCoordinateGraph x:Name="ccg_graphlog" AutoHide="True" LineStroke="Black" LineStrokeThickness="1" />
+                        <d3:ChartPlotter.HorizontalAxis>
+                            <d3:HorizontalAxis x:Name="hAxislog"/>
+                        </d3:ChartPlotter.HorizontalAxis>
+
+                        <d3:ChartPlotter.VerticalAxis>
+                            <d3:VerticalAxis x:Name="vAxislog"/>
+                        </d3:ChartPlotter.VerticalAxis>
+                    </d3:ChartPlotter>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Serial" GotFocus="TabItem_GotFocus">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox x:Name="tbx_serial" 
+                        HorizontalContentAlignment="Stretch"
+                        InputMethod.IsInputMethodEnabled="False"
+                        mah:TextBoxHelper.ClearTextButton="True"
+                        mah:TextBoxHelper.IsWaitingForData="False"
+                        mah:TextBoxHelper.UseFloatingWatermark="False"
+                        Margin="0,0,0,0" mah:TextBoxHelper.WatermarkWrapping="Wrap" TextWrapping="Wrap"  Text="" Height="270" VerticalAlignment="Top">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Command="ApplicationCommands.Cut" Style="{DynamicResource MahApps.Styles.MenuItem}" />
+                                <MenuItem Command="ApplicationCommands.Copy" Style="{DynamicResource MahApps.Styles.MenuItem}" />
+                                <MenuItem Command="ApplicationCommands.Paste" Style="{DynamicResource MahApps.Styles.MenuItem}" />
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </Grid>
+            </TabItem>
+        </mah:MetroAnimatedSingleRowTabControl>
+        <CheckBox x:Name="cbx_topmost" Content="TopMost" HorizontalAlignment="Left" Margin="131,42,0,0" VerticalAlignment="Top" Checked="cbx_topmost_Checked" Unchecked="cbx_topmost_Unchecked"/>
+        <Button x:Name="btn_analyze"  Content="analyze" HorizontalAlignment="Left" Margin="512,37,0,0" VerticalAlignment="Top" Width="64" Click="btn_analyze_Click"/>
+        <StatusBar Margin="0,368,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  >
+            <Grid>
+                <Image Source="/标准色稿-05.png" Margin="0,0,402,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Label x:Name="lbl_tip" Foreground="White" Content="Hello!" Background="{x:Null}" Margin="20,-2,35,0" VerticalAlignment="Center"/>
+            </Grid>
+        </StatusBar>
+        <!--<mah:ProgressRing x:Name="psr_load" Margin="514,21,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed"/>-->
+    </Grid>
+</mah:MetroWindow>
